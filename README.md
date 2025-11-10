@@ -14,7 +14,7 @@
 <!-- [Shiyao Xu](https://xusy2333.com), [Benedetta Liberatori](https://benedettaliberatori.github.io/), [Gül Varol](https://gulvarol.github.io/), [Paolo Rota](https://paolorota.github.io/) -->
 </p>
 
-tbc.
+I'm updating everything this week 😭 the code is really messy 🙂‍↔️
 
 ## TODO
 
