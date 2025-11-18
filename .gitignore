@@ -1,0 +1,18 @@
+logs/*
+logs_new/*
+logs_refine/*
+
+# Python
+__pycache__
+# Python
+__pycache__
+*.pyc
+*.egg-info
+dist
+
+# Log
+*.log.*
+
+.locks
+
+
