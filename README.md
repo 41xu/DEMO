@@ -1,4 +1,4 @@
-<h1 align="center">[3DV 2026] DEMO: Dense Motion Captioning</h1>
+<h1 align="center">DEMO: Dense Motion Captioning</h1>
 
 <p align="center">
   <a href='https://arxiv.org/abs/2511.05369'>
@@ -14,9 +14,11 @@
 <!-- [Shiyao Xu](https://xusy2333.com), [Benedetta Liberatori](https://benedettaliberatori.github.io/), [Gül Varol](https://gulvarol.github.io/), [Paolo Rota](https://paolorota.github.io/) -->
 </p>
 
-sorry for the delay but i'm really working for updating everything🥹
+<p align="center">
+<b>3DV 2026</b>
+</p>
+sorry for the delay but i'm really working on updating everything🥹
 
-I'm updating everything this week 😭 the code is really messy 🚬
 
 ## TODO
 
@@ -62,7 +64,11 @@ vis (mp4) and the data (npy files) can also be found in this google drive (<<<tb
 
 2. make sure you also download `stageX.json` and put it in `datasets/`
 
-3. you need to modify the `motion` path in `stage1.json` and `stage2.json`, or you need to re-generated the json.
+3. you need to modify the `motion` path in `stage1.json` and `stage2.json`. you need to re-generated the json.
+
+```
+python data/generated_json.py 
+```
 
 now you can train the model!
 
@@ -73,4 +79,28 @@ tbc. this part of code and script depend on [STMC](https://github.com/nv-tlabs/s
 ### Pretrained Weights
 
 tbd, will release in some google drive. (or huggingface?)
+
+## Train Scripts
+
+### On CompMo
+
+
+
+
+### On H3D+BABEL (UniMotion setting)
+
+
+## Evaluate Scripts
+
+## Citation
+
+```
+@article{xu2025densemotioncaptioning,
+      title={Dense Motion Captioning}, 
+      author={Shiyao Xu and Benedetta Liberatori and Gül Varol and Paolo Rota},
+      journal={arXiv preprint arXiv:2511.05369},
+      url={https://arxiv.org/abs/2511.05369}, 
+      year={2025}
+    }
+```
 
