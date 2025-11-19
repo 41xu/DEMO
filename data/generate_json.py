@@ -5,27 +5,10 @@ from random import sample
 import random
 import torch
 import numpy as np
+import argparse
 
 timeformat = "Identify the description of each motion in the given sequence in the format 'mm:ss:ms - text'. \n<motion>"
 
-
-
-# instructions = [
-#     "Generate a textual description corresponding to the given sequence of human motion.\n<motion>",
-#     # "Explain the motion illustrated in <motion> using language.",
-#     "Explain the motion using language.\n<motion>",
-#     "Describe the motion.\n<motion>",
-#     # "Describe the action being represented by <motion> using text.",
-#     "Give me a brief summary of the movement depicted in <motion>.",
-#     # "Explain the motion illustrated in <motion> using text.",
-#     "Please explain the movement being represented by <motion> using text.",
-#     "Describe the actions by using text.\n<motion>",
-#     "Build a narrative description that matches the stated series of human motion cues.\n<motion>",
-#     "What is the sequence of movements the person is performing in the motion?\n<motion>",
-#     "Form a written description that correlates with the seies of human motion provided.\n<motion>",
-#     "Translate the given human motion into a corresponding textual description.\n<motion>",
-#     "Describe the motion in natural language.\n<motion>",
-# ]
 
 instructions = [
     "Generate a textual description corresponding to the given sequence of human motion.\n" + timeformat,
@@ -44,9 +27,6 @@ instruct = ("<motion>\n\nGiven a complex human motion sequence of duration {} wh
     "The description of each action should be in the format 'mm:ss:ms - text'. \n" \
     "Here is an example: 00:00:00 - moves in a curve to the right side, 00:05:09 - doing a left foot squat \n")
 
-instruct_new = ("<motion>\n\nGiven a complex human motion sequence of duration {} which includes several actions, describe these actions in the motion with natural language according to the movement of human. \n" \
-    "The description of each action should be in the format 'text # start # end'. \n" \
-    "Here is an example: moves in a curve to the right side # 0.0 # 5.1,  doing a left foot squat # 5.1 # 7.0\n")
 
 
 """
@@ -174,7 +154,6 @@ def prepare_comp(motion_folder, texts_file="datasets/overall_timelines.txt", out
         data_dict["conversations"] = [
             {
                 "from": "human",
-                # "value": random.choice(instructions)
                 "value": instruct.format(time_convert(str(m_length / 20)))
             },
             {
@@ -241,7 +220,15 @@ def prepare_comp_val(motion_folder, texts_file="/home/sxu/stmc/test10k.txt", out
 
 
 if __name__ == '__main__':
-    prepare_stage1(outfile="./datasets/stage1.json")
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--stage1_out", type=str, default="./datasets/stage1.json")
+    parser.add_argument("--stage2_out", type=str, default="./datasets/stage2.json")
+    parser.add_argument("--test_out", type=str, default="./datasets/test.json")
+    parser.add_argument("--motion_folder", type=str, help="path of compmo / humanml3d", default="dataset/compmo")
+    parser.add_argument("--text_file", type=str, help="path of overall_timelines", default="datasets/overall_timelines.txt")
+    args = parser.parse_args()
+
+    prepare_stage1(outfile=args.stage1_out) # outfile = "./datasets/stage1.json"
     # motion_folder = path of compomo
-    prepare_comp(motion_folder="/home/sxu/stmc/final", texts_file="datasets/overall_timelines.txt", out_file="datasets/stage2.json")
-    prepare_comp_val(motion_folder="/home/sxu/stmc/final", texts_file="datasets/overall_timelines.txt", out_file="datasets/test.json", split="test")
+    prepare_comp(motion_folder=args.motion_folder, texts_file=args.text_file, out_file=args.stage2_out)
+    prepare_comp_val(motion_folder=args.motion_folder, texts_file=args.text_file, out_file=args.test_out, split="test")
