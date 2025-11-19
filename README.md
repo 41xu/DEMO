@@ -22,15 +22,19 @@ sorry for the delay but i'm really working on updating everything🥹
 
 ## TODO
 
+<details>
+<summary>TODO List: </summary>
+
 - [x] update [website page](https://xusy2333.com/demo/)
-- [ ] README
+- [x] README
 - [x] release [Dataset](https://huggingface.co/datasets/Xusy2333/DEMO) <<< need to be updated but at least the `.npy` is released 
-- [ ] train scripts for DEMO
+- [x] train scripts for DEMO
 - [ ] train scripts for UniMotion
 - [ ] evaluation script (but eval seems to be isolated, i don't remember)
 - [ ] pretrained weights (on huggingface?)
 - [ ] dataset generation scripts
 - [ ] maybe? some ablation exp and setting? if someone has interests
+</details>
 
 ## Environment Setup
 
@@ -106,6 +110,13 @@ deepspeed train.py --lora_enable True --lora_r 128 --lora_alpha 256 --mm_project
     --dataloader_num_workers 4 --lazy_preprocess True --bf16 True --vision_tower mlp \
     --log_base logs --model_name_or_path logs/stage1
 ```
+
+### Inference
+
+```
+python inference.py --model_path logs/stage2 --data datasets/test.json --output datasets/results/test.json --motion_dim 1056
+```
+
 
 ### On H3D+BABEL (UniMotion setting)
 

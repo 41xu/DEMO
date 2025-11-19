@@ -30,4 +30,4 @@ deepspeed train.py --lora_enable True --lora_r 128 --lora_alpha 256 --mm_project
     --model_name_or_path logs/stage1
 
 
-# python inference.py --model_path logs/stage2 --data datasets/test.json --output datasets/results/test.json --motion_dim 1056
+python inference.py --model_path logs/stage2 --data datasets/test.json --output datasets/results/test.json --motion_dim 1056
