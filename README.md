@@ -44,10 +44,17 @@ conda create python=3.9 -n demo  # it's finally 3.9 since my env is broken. 3.10
 conda activate demo
 # torch==2.6.0+cu124 or sth else
 conda install nvidia/label/cuda-12.1.1::cuda-toolkit
-pip install torch torchvision sentencepiece peft einops fastapi gradio numpy openai opencv_python pillow ray requests shortuuid tqdm uvicorn scipy bitsandbytes deepspeed tensorboard
+pip install torch torchvision torchmetrics sentencepiece peft einops fastapi gradio numpy openai opencv_python pillow ray requests shortuuid tqdm uvicorn scipy bitsandbytes deepspeed tensorboard
 # i prefer transformers==4.44.0
 pip install transformers==4.44.0 
 pip install flash-attn --no-build-isolation
+# for evaluation
+pip install git+https://github.com/openai/CLIP.git
+# need openjdk=8
+conda install -c conda-forge openjdk=8
+pip install pycocoevalcap
+# need bert_score for SODA(B)
+pip install bert_score
 ```
 
 ## Data Prepare
@@ -121,6 +128,28 @@ python inference.py --model_path logs/stage2 --data datasets/test.json --output 
 ### On H3D+BABEL (UniMotion setting)
 
 ## Evaluate Scripts
+
+in `eval` dir:
+```
+python prepare.py --pred_file ../datasets/result.json --comp_path YOUR_COMP_PATH
+
+# for temporal metrics: tIoU, F1;
+python overlap.py --pred_file data/result.json --ref_file data/gt.json --verbose 
+
+# for CIDEr, ROUGE_L, METEOR, BLEU1, BLEU4;
+python cider.py -s data/result.json -r data/gt.json -v
+
+# for SODA
+python soda.py -p data/result.json -r data/gt.json -v
+# for SODA(B)
+python soda.py -p data/result.json -r data/gt.json -v -m BertScore
+
+# for TMR
+TODO.
+# for CAR (please refer to their code)
+```
+
+For dense captioning, we follow the evaluation used in [Chapter-Llama](https://github.com/lucas-ventura/chapter-llama) for part of our evaluation, and also TMR similarity from [TMR](https://github.com/Mathux/TMR), CAR evaluation from [ChronAccRet](https://github.com/line/ChronAccRet). 
 
 ## Citation
 
