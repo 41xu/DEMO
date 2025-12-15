@@ -12,6 +12,8 @@ dist
 
 # Log
 *.log.*
+*.log
+
 
 .locks
 

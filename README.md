@@ -30,8 +30,8 @@ sorry for the delay but i'm really working on updating everything🥹
 - [x] release [Dataset](https://huggingface.co/datasets/Xusy2333/DEMO) <<< need to be updated but at least the `.npy` is released 
 - [x] train scripts for DEMO
 - [ ] train scripts for UniMotion
-- [ ] evaluation script (but eval seems to be isolated, i don't remember)
-- [ ] pretrained weights (on huggingface?)
+- [x] evaluation script (but eval seems to be isolated, i don't remember)
+- [x] pretrained weights (on huggingface?)
 - [ ] dataset generation scripts
 - [ ] maybe? some ablation exp and setting? if someone has interests
 </details>
@@ -56,6 +56,13 @@ pip install pycocoevalcap
 # need bert_score for SODA(B)
 pip install bert_score
 ```
+
+## Pretrain Models
+
+inference results see `datasets/result.json`
+
+pretrain models see [huggingface](https://huggingface.co/Xusy2333/DEMO/) or [google drive](https://drive.google.com/drive/folders/1zZlDxL9to8gCZSPBl33YN8521VQguE21?usp=drive_link).
+
 
 ## Data Prepare
 
@@ -110,7 +117,7 @@ deepspeed train.py --lora_enable True --lora_r 128 --lora_alpha 256 --mm_project
     --deepspeed scripts/zero2.json --conv_type llama_3 --pretrain_mm logs/stage1/mm_projector.bin \
     --group_by_modality_length True --exp_name stage2 --output_dir logs/stage2 \
     --data_path datasets/stage2.json --motion_folder YOUR_COMPMO_PATH --data_root YOUR_COMPMO_PATH \
-    --motion_dim 1056 --num_train_epochs 3 --gradient_accumulation_steps 2 --per_device_train_batch_size 4 \
+    --motion_dim 1056 --num_train_epochs 5 --gradient_accumulation_steps 2 --per_device_train_batch_size 4 \
     --evaluation_strategy no --save_strategy steps --save_steps 5000 --save_total_limit 1 \
     --learning_rate 2e-5 --warmup_ratio 0.1 --lr_scheduler_type cosine --logging_steps 1 \
     --model_max_length 3072 --gradient_checkpointing True --max_grad_norm=1.0 \
