@@ -17,7 +17,7 @@
 <p align="center">
 <b>3DV 2026</b>
 </p>
-sorry for the delay but i'm really working on updating everything🥹
+yes everything is fixed now!
 
 
 ## TODO
@@ -110,6 +110,10 @@ deepspeed train.py --deepspeed scripts/zero2.json --freeze_backbone True --conv_
 ```
 
 ### Stage2: dense captioning instruction turning on compmo
+
+before training stage2, could you please go to ['data/datasets.py' L322](https://github.com/41xu/DEMO/blob/6f4c3eecc7faddda0ddad6df20e9be7f23b6a472/data/datasets.py#L322), remove the annotate of rotate the data manually? or waiting for adding some args to the datastes.py that indicates stage1 or stage2. 
+
+<i>ps: i'm warmly welcome anyone improve this codebase since i know it's some kind of a mess and shit.</i>
 
 need to modify your compmo path
 ```
